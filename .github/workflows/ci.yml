@@ -1,0 +1,53 @@
+---
+# Couple of CI tasks to be executed on every commit to the trunk branch and
+# on every incoming PR. If these fail, then it is not possible to deploy
+# to production, for instance.
+#
+# - Test that the application behaves as expected using the E2E tests.
+# - Test that the code lints to a minimum.
+# - Test that the Docker image would build (npm run build must pass).
+
+name: CI
+
+on:
+  push:
+    branches:
+      - trunk
+  pull_request:
+
+jobs:
+  test:
+    name: Build and run E2E tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: npm install
+      - name: Install Plywright
+        run: |
+          npx playwright install-deps
+          npx playwright install-deps chromium
+      - run: npm test
+  lint:
+    name: Run linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: npm run lint
+  docker:
+    name: Test the Docker image builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

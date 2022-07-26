@@ -1,0 +1,38 @@
+body {
+	--foreground-color: #000000;
+	--background-color: #ffffff;
+	--background-faded-color: #ffffff00;
+	--accent-color: #186d92;
+	--twitch-color: #9f77f7;
+	--highlight-color: #ddf5ff;
+	--faded-color: #dedede;
+
+	background: var(--background-color);
+	color: var(--foreground-color);
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+		'Open Sans', 'Helvetica Neue', sans-serif;
+	font-size: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+		--foreground-color: #ffffff;
+		--background-color: #000000;
+		--background-faded-color: #00000000;
+		--accent-color: #a88e00;
+	}
+}
+
+.wrap {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+a {
+	color: var(--accent-color);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
