@@ -12,6 +12,7 @@
 
 <script lang="ts">
 	import type { VideoData } from '$lib/video';
+	import { dev } from '$app/env';
 
 	import 'normalize.css/normalize.css';
 	import '$lib/app.css';
@@ -45,6 +46,13 @@
 	/>
 	<meta property="og:site_name" content="makigas" />
 	<meta property="og:image" content="https://early.makigas.es/card.jpg" />
+
+	{#if !dev}
+		<script
+			defer
+			data-domain="early.makigas.es"
+			src="https://plausible.io/js/plausible.js"></script>
+	{/if}
 </svelte:head>
 
 <Navbar />
