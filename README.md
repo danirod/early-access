@@ -1,38 +1,40 @@
-# create-svelte
+# early.makigas.es
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This is the web application that powers [early.makigas.es](https://early.makigas.es). This is an index that shows the currently available content on early access, that can be seen before it is available on YouTube.
 
-## Creating a project
+The content will still be free, but people who support the project will get access earlier, even though this may mean that they get access to something not fully baked, that may have sometimes editing errors or that might change.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Technical aspects
 
-```bash
-# create a new project in the current directory
-npm init svelte
+makigas-early is a SvelteKit web application. Despite being a single page, it is important that this website is rendered server-side for SEO purposes, and SvelteKit does this for free. Additionally, in order to avoid fighting with CORS, at the moment it is more useful to do things via endpoints rather than allowing fetch() to contact the internet.
 
-# create a new project in my-app
-npm init svelte my-app
-```
+makigas-early consumes data from the makigas.es website in order to track which videos have been marked as "draft". The data presented in early.makigas.es comes from this endpoint.
 
-## Developing
+## How to develop
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Requirements:
 
-```bash
-npm run dev
+- NodeJS 18.
+- npm.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Run `npm i` and use `npm run dev` to launch the development server.
 
-## Building
+## How to test
 
-To create a production version of your app:
+Run `npm run test` to test with Playwright.
 
-```bash
-npm run build
-```
+## How to build
 
-You can preview the production build with `npm run preview`.
+Since this is going to run inside a Docker container, I am using the Node adapter. Run `npm run build` to compile the application. To launch the application use `node build/index` or simply `node build`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Use `docker build` to test the container. The container should expose the port 3000, use `-p 3000:3000` to access it from the outside.
+
+## Contributing
+
+PRs to fix bugs are welcome. Or just point them out as an issue and I'll have them fixed whenever I can.
+
+For new features or dramatical changes, please send an issue beforehand so that I can propose whether I agree or not. While this project is developed on the open, I am still its owner and I get to choose how I want the site to behave.
+
+## License
+
+GNU GPL 3.0. I know this is viral, that is the point.
