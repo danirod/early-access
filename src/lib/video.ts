@@ -9,7 +9,7 @@ export interface MakigasVideo {
 		'makigas:youtube': {
 			href: string;
 		};
-		'icon': {
+		icon: {
 			href: string;
 		};
 	};
@@ -35,7 +35,7 @@ export function convert(video: MakigasVideo): VideoData {
 		duration: video.duration,
 		twitchUrl: video._links['makigas:twitch'].href,
 		thumbnail: video._links['icon'].href,
-		youtubeUrl: video._links['makigas:youtube'].href,
+		youtubeUrl: video._links['makigas:youtube'].href
 	};
 }
 
