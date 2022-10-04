@@ -32,24 +32,12 @@ export interface VideoData {
 }
 
 export function convert(video: MakigasVideo): VideoData {
-	const cards = video.playlist._links['makigas:card'].map((c) => ({
-		...c,
-		max: c.sizes.split('x').map(parseInt)[0]
-	}));
-	cards.sort((a, b) => {
-		if (a.max > b.max) {
-			return -1;
-		} else if (a.max < b.max) {
-			return 1;
-		}
-		return 0;
-	});
 	return {
 		title: video.title,
 		description: video.description,
 		duration: video.duration,
 		twitchUrl: video._links['makigas:twitch'].href,
-		thumbnail: cards[0].href
+		thumbnail: video._links['icon'].href,
 	};
 }
 
