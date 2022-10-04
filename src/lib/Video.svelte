@@ -1,11 +1,14 @@
 <script lang="ts">
+	import { provider } from '$lib/stores/provider';
+
 	export let title: string;
 	export let thumbnail: string;
+	export let youtubeUrl: string;
 	export let twitchUrl: string;
 </script>
 
 <figure>
-	<a target="_blank" href={twitchUrl}>
+	<a target="_blank" href={$provider === 'twitch' ? twitchUrl : youtubeUrl}>
 		<div class="thumbnail">
 			<img src={thumbnail} alt={title} />
 		</div>

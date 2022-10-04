@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { VideoData } from './video';
 	import Video from '$lib/Video.svelte';
+	import ProviderToggle from '$lib/ProviderToggle.svelte';
 
 	let expanded = false;
 
@@ -11,6 +12,10 @@
 	}
 </script>
 
+<div class="toggle">
+	<ProviderToggle />
+</div>
+
 <div class="grid" class:expanded>
 	<button hidden={expanded} class="more" on:click={toggleMore}>Ver más</button>
 	{#each videos as video}
@@ -19,6 +24,11 @@
 </div>
 
 <style>
+	.toggle {
+		text-align: center;
+		margin-top: 1rem;
+	}
+
 	.grid {
 		max-height: 400px;
 		overflow: hidden;
